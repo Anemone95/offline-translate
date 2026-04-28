@@ -1,1 +1,1 @@
-../../../../../../../../../../sherpa-onnx/kotlin-api/OfflineRecognizer.kt
+../../../../../../../../../../sherpa-onnx/sherpa-onnx/kotlin-api/OfflineRecognizer.kt

@@ -1,0 +1,46 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.viwoods.stt.bergamot'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.viwoods.stt.bergamot.test"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "0.1.0"
+        ndk { abiFilters 'arm64-v8a' }
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug { /* default */ }
+    }
+
+    sourceSets {
+        main {
+            // Pull the prebuilt .so straight from third_party/bergamot/jniLibs/.
+            // build-jni-android-arm64.sh deposits it there.
+            jniLibs.srcDirs = ['../../jniLibs']
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions { jvmTarget = '17' }
+
+    packagingOptions {
+        jniLibs { useLegacyPackaging = true }
+    }
+}
+
+dependencies {
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test:runner:1.6.2'
+}

@@ -1,1 +1,1 @@
-../../../../../../../../../../sherpa-onnx/kotlin-api/HomophoneReplacerConfig.kt
+../../../../../../../../../../sherpa-onnx/sherpa-onnx/kotlin-api/HomophoneReplacerConfig.kt

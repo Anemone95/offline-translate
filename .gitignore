@@ -37,3 +37,18 @@ Thumbs.db
 *.bak
 *.orig
 *~
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Models / large artifacts
+models/
+*.onnx_data
+
+# Bergamot build artifacts (upstream clone + cmake outputs are not committed)
+third_party/bergamot/src/
+third_party/bergamot/build-*/
+third_party/bergamot/logs/
+third_party/bergamot/jniLibs/

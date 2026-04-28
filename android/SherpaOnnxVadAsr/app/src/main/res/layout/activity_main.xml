@@ -1,10 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFFFFFFF"
-    android:padding="16dp">
+    android:background="#FFFFFFFF">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFFFF"
+        app:tabMode="fixed"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="#FF000000"
+        app:tabIndicatorHeight="2dp"
+        app:tabSelectedTextColor="#FF000000"
+        app:tabTextColor="#FF000000"
+        app:tabTextAppearance="@style/TabText">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_speech" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_translate" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,16 +78,20 @@
         android:layout_weight="1"
         android:fillViewport="true">
 
-        <TextView
+        <EditText
             android:id="@+id/my_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFFFFFFF"
             android:padding="12dp"
             android:singleLine="false"
+            android:gravity="top|start"
+            android:inputType="textMultiLine"
             android:textColor="#FF000000"
             android:textSize="22sp"
-            android:textIsSelectable="true"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:cursorVisible="false"
             android:text="@string/hint" />
     </ScrollView>
 
@@ -105,5 +140,7 @@
         android:textStyle="bold"
         android:enabled="false"
         android:text="@string/start" />
+
+    </LinearLayout>
 
 </LinearLayout>

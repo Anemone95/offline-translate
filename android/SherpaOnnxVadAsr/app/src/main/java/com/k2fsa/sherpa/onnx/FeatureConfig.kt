@@ -1,1 +1,1 @@
-../../../../../../../../../../sherpa-onnx/kotlin-api/FeatureConfig.kt
+../../../../../../../../../../sherpa-onnx/sherpa-onnx/kotlin-api/FeatureConfig.kt

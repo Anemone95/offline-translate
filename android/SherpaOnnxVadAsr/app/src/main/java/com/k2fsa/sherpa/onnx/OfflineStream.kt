@@ -1,1 +1,1 @@
-../../../../../../../../../../sherpa-onnx/kotlin-api/OfflineStream.kt
+../../../../../../../../../../sherpa-onnx/sherpa-onnx/kotlin-api/OfflineStream.kt

@@ -32,7 +32,7 @@ android {
         jvmTarget = '17'
     }
     androidResources {
-        noCompress 'onnx', 'txt'
+        noCompress 'onnx', 'txt', 'bin', 'spm'
     }
     packagingOptions {
         jniLibs {

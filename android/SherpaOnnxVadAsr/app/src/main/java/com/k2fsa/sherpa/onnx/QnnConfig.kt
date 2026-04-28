@@ -1,1 +1,1 @@
-../../../../../../../../../../sherpa-onnx/kotlin-api/QnnConfig.kt
+../../../../../../../../../../sherpa-onnx/sherpa-onnx/kotlin-api/QnnConfig.kt

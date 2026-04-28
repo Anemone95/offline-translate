@@ -1,1 +1,1 @@
-../../../../../../../../../../sherpa-onnx/kotlin-api/Vad.kt
+../../../../../../../../../../sherpa-onnx/sherpa-onnx/kotlin-api/Vad.kt
