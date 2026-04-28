@@ -27,6 +27,14 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <service
+            android:name="com.viwoods.stt.translate.TranslateService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.viwoods.stt.translate.action.BIND" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

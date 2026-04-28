@@ -29,7 +29,7 @@ import com.k2fsa.sherpa.onnx.OnlineRecognizer
 import com.k2fsa.sherpa.onnx.OnlineRecognizerConfig
 import com.k2fsa.sherpa.onnx.R
 import com.k2fsa.sherpa.onnx.Vad
-import com.viwoods.stt.bergamot.BergamotTranslator
+import com.viwoods.stt.translate.TranslatorHolder
 import com.k2fsa.sherpa.onnx.getEndpointConfig
 import com.k2fsa.sherpa.onnx.getFeatureConfig
 import com.k2fsa.sherpa.onnx.getModelConfig
@@ -92,8 +92,6 @@ class MainActivity : AppCompatActivity() {
     private var isRecording: Boolean = false
 
     private var currentTab: Int = TAB_SPEECH
-    private var translator: BergamotTranslator? = null
-    private val translatorExecutor = Executors.newSingleThreadExecutor()
     private lateinit var translationView: TextView
     private lateinit var clearSourceButton: ImageButton
     private lateinit var copyTranslationButton: ImageButton
@@ -228,9 +226,9 @@ class MainActivity : AppCompatActivity() {
         if (src.isEmpty()) return
         recordButton.isEnabled = false
         translationView.text = getString(R.string.translation_loading)
-        translatorExecutor.execute {
+        TranslatorHolder.executor.execute {
             try {
-                val t = ensureTranslator()
+                val t = TranslatorHolder.ensureLoaded(applicationContext)
                 val started = SystemClock.elapsedRealtime()
                 val out = t.translate(src)
                 val dt = SystemClock.elapsedRealtime() - started
@@ -247,37 +245,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    @Synchronized
-    private fun ensureTranslator(): BergamotTranslator {
-        var t = translator
-        if (t == null) {
-            val modelDir = copyBergamotModelToFiles()
-            t = BergamotTranslator(modelDir.absolutePath)
-            translator = t
-        }
-        return t
-    }
-
-    private fun copyBergamotModelToFiles(): java.io.File {
-        val outDir = java.io.File(filesDir, "bergamot-enzh")
-        if (!outDir.exists()) outDir.mkdirs()
-        val files = listOf(
-            "model.enzh.intgemm.alphas.bin",
-            "lex.50.50.enzh.s2t.bin",
-            "srcvocab.enzh.spm",
-            "trgvocab.enzh.spm",
-        )
-        for (name in files) {
-            val out = java.io.File(outDir, name)
-            if (out.exists() && out.length() > 0) continue
-            assets.open("bergamot-enzh/$name").use { input ->
-                out.outputStream().use { output -> input.copyTo(output) }
-            }
-            Log.d(TAG, "copied bergamot asset $name (${out.length() / 1024} KB)")
-        }
-        return outDir
     }
 
     private fun setupSpinner() {
