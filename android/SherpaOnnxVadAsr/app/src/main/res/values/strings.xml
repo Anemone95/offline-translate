@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">实时转写</string>
+    <string name="hint">点击下方"开始"按钮,实时转写你说的话。</string>
+    <string name="loading">模型加载中,请稍候…</string>
+    <string name="translation_placeholder">(翻译功能暂未开启)</string>
+    <string name="label_model">模型</string>
+    <string name="model_sense_voice">SenseVoice (多语种, 段落式)</string>
+    <string name="model_zipformer_zh">Zipformer 中文 14M (流式)</string>
+    <string name="model_zipformer_en">Zipformer 英文 (流式)</string>
+    <string name="model_zipformer_ko">Zipformer 韩语 (流式)</string>
+    <string name="model_zipformer_fr">Zipformer 法语 (流式)</string>
+    <string name="model_zipformer_es">Zipformer 西班牙语 (流式)</string>
+    <string name="model_zipformer_de">Zipformer 德语 (流式)</string>
+    <string name="model_zipformer_ru">Zipformer 俄语 (流式)</string>
+    <string name="label_transcript">语音识别</string>
+    <string name="label_translation">翻译</string>
+    <string name="start">开始</string>
+    <string name="stop">停止</string>
+</resources>

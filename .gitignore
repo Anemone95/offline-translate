@@ -1,0 +1,39 @@
+# Gradle / Android build
+.gradle/
+build/
+out/
+local.properties
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# Native build
+.cxx/
+.externalNativeBuild/
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# Logs / captures
+*.log
+captures/
+.navigation/
+
+# Keystores / signing
+*.jks
+*.keystore
+keystore.properties
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backups
+*.bak
+*.orig
+*~

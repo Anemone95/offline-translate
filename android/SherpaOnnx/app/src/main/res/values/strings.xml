@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">实时转写</string>
+    <string name="hint">点击下方"开始"按钮,实时转写你说的话。</string>
+    <string name="translation_placeholder">(翻译功能暂未开启)</string>
+    <string name="label_transcript">语音识别</string>
+    <string name="label_translation">翻译</string>
+    <string name="start">开始</string>
+    <string name="stop">停止</string>
+</resources>
