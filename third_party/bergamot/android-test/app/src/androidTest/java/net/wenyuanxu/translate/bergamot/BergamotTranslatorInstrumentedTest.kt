@@ -1,4 +1,4 @@
-package com.viwoods.stt.bergamot
+package net.wenyuanxu.translate.bergamot
 
 import android.content.Context
 import android.os.Environment

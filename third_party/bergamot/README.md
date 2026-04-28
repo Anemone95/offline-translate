@@ -250,9 +250,9 @@ ELF 64-bit LSB shared object, ARM aarch64, version 1 (SYSV),
 dynamically linked, BuildID[sha1]=..., stripped
 
 $ llvm-readelf --dyn-syms libbergamot-translator-jni.so | grep Java_
-   380: ...  4820 FUNC  GLOBAL DEFAULT  Java_com_viwoods_stt_bergamot_BergamotTranslator_nativeNew
-   402: ...  1328 FUNC  GLOBAL DEFAULT  Java_com_viwoods_stt_bergamot_BergamotTranslator_nativeTranslate
-   465: ...   116 FUNC  GLOBAL DEFAULT  Java_com_viwoods_stt_bergamot_BergamotTranslator_nativeClose
+   380: ...  4820 FUNC  GLOBAL DEFAULT  Java_net_wenyuanxu_translate_bergamot_BergamotTranslator_nativeNew
+   402: ...  1328 FUNC  GLOBAL DEFAULT  Java_net_wenyuanxu_translate_bergamot_BergamotTranslator_nativeTranslate
+   465: ...   116 FUNC  GLOBAL DEFAULT  Java_net_wenyuanxu_translate_bergamot_BergamotTranslator_nativeClose
 ```
 
 7.6 MB stripped is the cost of: marian's transformer kernels, sentencepiece
@@ -360,10 +360,10 @@ The test:
 2. Copy
    `third_party/bergamot/jni/kotlin/BergamotTranslator.kt`
    into
-   `android/SherpaOnnxVadAsr/app/src/main/java/com/viwoods/stt/bergamot/BergamotTranslator.kt`.
+   `android/SherpaOnnxVadAsr/app/src/main/java/net/wenyuanxu/translate/bergamot/BergamotTranslator.kt`.
    Note the existing OPUS-MT `Translator.kt` lives under
    `com.k2fsa.sherpa.onnx`; the bergamot wrapper deliberately uses
-   `com.viwoods.stt.bergamot` so the two can coexist.
+   `net.wenyuanxu.translate.bergamot` so the two can coexist.
 3. In `MainActivity.kt`, add a "Bergamot" toggle next to the existing OPUS-MT
    one. On startup, copy the Bergamot model files out of `assets/` (or from
    downloaded storage) into a writable directory and pass that path to

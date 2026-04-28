@@ -1,6 +1,6 @@
 // JNI wrapper around bergamot-translator's BlockingService.
 //
-// Java/Kotlin side:  com.viwoods.stt.bergamot.BergamotTranslator
+// Java/Kotlin side:  net.wenyuanxu.translate.bergamot.BergamotTranslator
 // Loadable from:     libbergamot-translator-jni.so
 //
 // Lifecycle:
@@ -174,7 +174,7 @@ std::string jstring2str(JNIEnv *env, jstring s) {
 extern "C" {
 
 JNIEXPORT jlong JNICALL
-Java_com_viwoods_stt_bergamot_BergamotTranslator_nativeNew(JNIEnv *env, jclass /*clazz*/, jstring jModelDir) {
+Java_net_wenyuanxu_translate_bergamot_BergamotTranslator_nativeNew(JNIEnv *env, jclass /*clazz*/, jstring jModelDir) {
   std::string modelDir = jstring2str(env, jModelDir);
   if (modelDir.empty()) {
     LOGE("nativeNew: modelDir is empty");
@@ -214,7 +214,7 @@ Java_com_viwoods_stt_bergamot_BergamotTranslator_nativeNew(JNIEnv *env, jclass /
 }
 
 JNIEXPORT jstring JNICALL
-Java_com_viwoods_stt_bergamot_BergamotTranslator_nativeTranslate(JNIEnv *env, jclass /*clazz*/,
+Java_net_wenyuanxu_translate_bergamot_BergamotTranslator_nativeTranslate(JNIEnv *env, jclass /*clazz*/,
                                                                  jlong handle, jstring jText) {
   auto *inst = fromHandle(handle);
   if (!inst) {
@@ -246,7 +246,7 @@ Java_com_viwoods_stt_bergamot_BergamotTranslator_nativeTranslate(JNIEnv *env, jc
 }
 
 JNIEXPORT void JNICALL
-Java_com_viwoods_stt_bergamot_BergamotTranslator_nativeClose(JNIEnv * /*env*/, jclass /*clazz*/,
+Java_net_wenyuanxu_translate_bergamot_BergamotTranslator_nativeClose(JNIEnv * /*env*/, jclass /*clazz*/,
                                                              jlong handle) {
   auto *inst = fromHandle(handle);
   if (inst) {

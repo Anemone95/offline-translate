@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.viwoods.stt.bergamot'
+    namespace 'net.wenyuanxu.translate.bergamot'
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.viwoods.stt.bergamot.test"
+        applicationId "net.wenyuanxu.translate.bergamot.test"
         minSdk 24
         targetSdk 33
         versionCode 1

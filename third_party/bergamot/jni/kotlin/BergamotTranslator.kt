@@ -1,4 +1,4 @@
-package com.viwoods.stt.bergamot
+package net.wenyuanxu.translate.bergamot
 
 /**
  * Thin Kotlin wrapper around the bergamot-translator JNI .so.

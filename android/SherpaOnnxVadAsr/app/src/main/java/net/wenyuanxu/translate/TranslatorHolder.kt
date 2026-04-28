@@ -2,7 +2,7 @@ package net.wenyuanxu.translate
 
 import android.content.Context
 import android.util.Log
-import com.viwoods.stt.bergamot.BergamotTranslator
+import net.wenyuanxu.translate.bergamot.BergamotTranslator
 import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
