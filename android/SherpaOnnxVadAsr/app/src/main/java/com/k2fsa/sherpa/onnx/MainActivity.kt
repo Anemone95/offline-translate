@@ -1,21 +1,25 @@
 package com.k2fsa.sherpa.onnx.vad.asr
 
 import android.Manifest
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.pm.PackageManager
 import android.media.AudioFormat
 import android.media.AudioRecord
 import android.media.MediaRecorder
 import android.os.Bundle
 import android.os.SystemClock
-import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ScrollView
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.material.tabs.TabLayout
@@ -71,7 +75,6 @@ class MainActivity : AppCompatActivity() {
     private val onlineRecognizers = mutableMapOf<ModelMode, OnlineRecognizer>()
 
     private var audioRecord: AudioRecord? = null
-    private var recordingThread: Thread? = null
     private val audioSource = MediaRecorder.AudioSource.MIC
     private val sampleRateInHz = 16000
     private val channelConfig = AudioFormat.CHANNEL_IN_MONO
@@ -92,6 +95,8 @@ class MainActivity : AppCompatActivity() {
     private var translator: BergamotTranslator? = null
     private val translatorExecutor = Executors.newSingleThreadExecutor()
     private lateinit var translationView: TextView
+    private lateinit var clearSourceButton: ImageButton
+    private lateinit var copyTranslationButton: ImageButton
 
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>, grantResults: IntArray
@@ -117,6 +122,12 @@ class MainActivity : AppCompatActivity() {
         transcriptScroll = findViewById(R.id.transcript_scroll)
         translationView = findViewById(R.id.translation_text)
 
+        clearSourceButton = findViewById(R.id.clear_source_button)
+        clearSourceButton.setOnClickListener { transcriptView.text = "" }
+
+        copyTranslationButton = findViewById(R.id.copy_translation_button)
+        copyTranslationButton.setOnClickListener { copyTranslationToClipboard() }
+
         recordButton = findViewById(R.id.record_button)
         recordButton.isEnabled = false
         recordButton.setOnClickListener { onPrimaryButtonClick() }
@@ -129,7 +140,7 @@ class MainActivity : AppCompatActivity() {
         transcriptView.text = getString(R.string.loading)
 
         // Default mode is SenseVoice — preload it so the user can start immediately.
-        loadMode(currentMode, isInitial = true)
+        loadMode(currentMode)
     }
 
     private fun setupTabs() {
@@ -171,6 +182,8 @@ class MainActivity : AppCompatActivity() {
                     transcriptView.setText(R.string.hint)
                 }
                 recordButton.setText(if (isRecording) R.string.stop else R.string.start)
+                clearSourceButton.visibility = View.GONE
+                copyTranslationButton.visibility = View.GONE
             }
             TAB_TRANSLATE -> {
                 transcriptLabel.setText(R.string.label_original)
@@ -185,8 +198,21 @@ class MainActivity : AppCompatActivity() {
                 }
                 recordButton.setText(R.string.translate)
                 recordButton.isEnabled = true
+                clearSourceButton.visibility = View.VISIBLE
+                copyTranslationButton.visibility = View.VISIBLE
             }
         }
+    }
+
+    private fun copyTranslationToClipboard() {
+        val text = translationView.text?.toString().orEmpty()
+        if (text.isEmpty() || text == getString(R.string.translation_placeholder) ||
+            text == getString(R.string.translation_loading)) {
+            return
+        }
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText("translation", text))
+        Toast.makeText(this, R.string.copied, Toast.LENGTH_SHORT).show()
     }
 
     private fun onPrimaryButtonClick() {
@@ -266,7 +292,7 @@ class MainActivity : AppCompatActivity() {
                     modelSpinner.setSelection(currentMode.ordinal)
                     return
                 }
-                loadMode(picked, isInitial = false)
+                loadMode(picked)
             }
             override fun onNothingSelected(p: AdapterView<*>?) {}
         }
@@ -286,7 +312,7 @@ class MainActivity : AppCompatActivity() {
         modelSpinner.isEnabled = (tab == TAB_SPEECH)
     }
 
-    private fun loadMode(mode: ModelMode, isInitial: Boolean) {
+    private fun loadMode(mode: ModelMode) {
         recordButton.isEnabled = false
         modelSpinner.isEnabled = false
         transcriptView.text = getString(R.string.loading)
@@ -333,7 +359,7 @@ class MainActivity : AppCompatActivity() {
             transcriptView.text = ""
             lastText = ""
             vad?.reset()
-            recordingThread = thread(true) {
+            thread(start = true, isDaemon = true, name = "asr-recording") {
                 if (currentMode == ModelMode.SENSE_VOICE) processSamplesVadOffline()
                 else processSamplesStreaming()
             }

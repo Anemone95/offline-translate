@@ -23,4 +23,7 @@
     <string name="translate_hint">请输入要翻译的英文…</string>
     <string name="translation_loading">翻译中…</string>
     <string name="model_translate_en_zh">Bergamot 英→中</string>
+    <string name="copied">已复制</string>
+    <string name="clear_source_desc">清空原文</string>
+    <string name="copy_translation_desc">复制译文</string>
 </resources>

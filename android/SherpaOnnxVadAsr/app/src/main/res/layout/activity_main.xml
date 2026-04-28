@@ -71,29 +71,45 @@
         android:textStyle="bold"
         android:paddingBottom="6dp" />
 
-    <ScrollView
-        android:id="@+id/transcript_scroll"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:fillViewport="true">
+        android:layout_weight="1">
 
-        <EditText
-            android:id="@+id/my_text"
+        <ScrollView
+            android:id="@+id/transcript_scroll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFFFF"
-            android:padding="12dp"
-            android:singleLine="false"
-            android:gravity="top|start"
-            android:inputType="textMultiLine"
-            android:textColor="#FF000000"
-            android:textSize="22sp"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:cursorVisible="false"
-            android:text="@string/hint" />
-    </ScrollView>
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <EditText
+                android:id="@+id/my_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFFFF"
+                android:padding="12dp"
+                android:singleLine="false"
+                android:gravity="top|start"
+                android:inputType="textMultiLine"
+                android:textColor="#FF000000"
+                android:textSize="22sp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:cursorVisible="false"
+                android:text="@string/hint" />
+        </ScrollView>
+
+        <ImageButton
+            android:id="@+id/clear_source_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/clear_source_desc"
+            android:src="@drawable/ic_close"
+            android:visibility="gone" />
+    </FrameLayout>
 
     <View
         android:layout_width="match_parent"
@@ -112,24 +128,40 @@
         android:textStyle="bold"
         android:paddingBottom="6dp" />
 
-    <ScrollView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:fillViewport="true">
+        android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/translation_text"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFFFF"
-            android:padding="12dp"
-            android:singleLine="false"
-            android:textColor="#FF000000"
-            android:textSize="22sp"
-            android:textIsSelectable="true"
-            android:text="@string/translation_placeholder" />
-    </ScrollView>
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <TextView
+                android:id="@+id/translation_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFFFF"
+                android:padding="12dp"
+                android:singleLine="false"
+                android:textColor="#FF000000"
+                android:textSize="22sp"
+                android:textIsSelectable="true"
+                android:text="@string/translation_placeholder" />
+        </ScrollView>
+
+        <ImageButton
+            android:id="@+id/copy_translation_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/copy_translation_desc"
+            android:src="@drawable/ic_content_copy"
+            android:visibility="gone" />
+    </FrameLayout>
 
     <Button
         android:id="@+id/record_button"
