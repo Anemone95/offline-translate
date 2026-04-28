@@ -1,4 +1,4 @@
-package com.viwoods.stt.translate
+package net.wenyuanxu.translate
 
 object TranslateErrors {
     const val OK = 0

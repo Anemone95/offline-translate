@@ -18,22 +18,22 @@ launching the STT UI.
 
 ## Calling the translation service from another app
 
-The service lives in `com.viwoods.stt` under
-`com.viwoods.stt.translate.TranslateService`. No permission is required —
+The service lives in `net.wenyuanxu.translate` under
+`net.wenyuanxu.translate.TranslateService`. No permission is required —
 any app on the device can bind, as long as it has been granted package
-visibility for `com.viwoods.stt` (Android 11+ requires this; see step 2
+visibility for `net.wenyuanxu.translate` (Android 11+ requires this; see step 2
 below).
 
 ### 1. Copy the AIDL files into the calling app
 
-Two files, package `com.viwoods.stt.translate`, must be placed under the
-caller's `app/src/main/aidl/com/viwoods/stt/translate/`:
+Two files, package `net.wenyuanxu.translate`, must be placed under the
+caller's `app/src/main/aidl/net/wenyuanxu/translate/`:
 
 - `ITranslator.aidl`
 - `ITranslateCallback.aidl`
 
 The canonical copies are at
-`android/SherpaOnnxVadAsr/app/src/main/aidl/com/viwoods/stt/translate/`
+`android/SherpaOnnxVadAsr/app/src/main/aidl/net/wenyuanxu/translate/`
 in this repo.
 
 In the caller's `app/build.gradle` enable AIDL:
@@ -48,7 +48,7 @@ android {
 ```xml
 <!-- Android 11+: declare visibility of the host package -->
 <queries>
-    <package android:name="com.viwoods.stt" />
+    <package android:name="net.wenyuanxu.translate" />
 </queries>
 ```
 
@@ -60,8 +60,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
-import com.viwoods.stt.translate.ITranslator
-import com.viwoods.stt.translate.ITranslateCallback
+import net.wenyuanxu.translate.ITranslator
+import net.wenyuanxu.translate.ITranslateCallback
 
 class TranslatorClient(private val ctx: Context) {
     private var svc: ITranslator? = null
@@ -73,8 +73,8 @@ class TranslatorClient(private val ctx: Context) {
     }
 
     fun bind() {
-        val i = Intent("com.viwoods.stt.translate.action.BIND").apply {
-            setPackage("com.viwoods.stt")
+        val i = Intent("net.wenyuanxu.translate.action.BIND").apply {
+            setPackage("net.wenyuanxu.translate")
         }
         ctx.bindService(i, conn, Context.BIND_AUTO_CREATE)
     }
@@ -109,7 +109,7 @@ class TranslatorClient(private val ctx: Context) {
 | `void warmUp()` | Async eager model load. Idempotent. |
 | `boolean isReady()` | Whether the model is in memory. |
 
-Error codes (`com.viwoods.stt.translate.TranslateErrors`):
+Error codes (`net.wenyuanxu.translate.TranslateErrors`):
 
 | Code | Constant | Meaning |
 | --- | --- | --- |
@@ -134,8 +134,8 @@ Error codes (`com.viwoods.stt.translate.TranslateErrors`):
 ### Quick end-to-end check
 
 ```
-adb shell pm dump com.viwoods.stt | grep -A 1 TranslateService
-# expected: filter with action "com.viwoods.stt.translate.action.BIND"
+adb shell pm dump net.wenyuanxu.translate | grep -A 1 TranslateService
+# expected: filter with action "net.wenyuanxu.translate.action.BIND"
 ```
 
 ---
@@ -144,8 +144,8 @@ adb shell pm dump com.viwoods.stt | grep -A 1 TranslateService
 
 ```
 android/SherpaOnnxVadAsr/        # the actual app (AIDL service lives here)
-    app/src/main/aidl/com/viwoods/stt/translate/
-    app/src/main/java/com/viwoods/stt/translate/
+    app/src/main/aidl/net/wenyuanxu/translate/
+    app/src/main/java/net/wenyuanxu/translate/
 sherpa-onnx/                     # submodule, sparse-checkout of kotlin-api
 third_party/bergamot/            # bergamot-translator JNI wrapper + build
 scripts/bergamot/                # cross-compile scripts

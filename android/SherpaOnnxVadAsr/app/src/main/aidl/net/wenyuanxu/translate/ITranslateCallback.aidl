@@ -1,4 +1,4 @@
-package com.viwoods.stt.translate;
+package net.wenyuanxu.translate;
 
 interface ITranslateCallback {
     // Fires exactly once on success.

@@ -1,4 +1,4 @@
-package com.viwoods.stt.translate
+package net.wenyuanxu.translate
 
 import android.content.Context
 import android.util.Log

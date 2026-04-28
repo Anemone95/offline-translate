@@ -1,9 +1,9 @@
-// On-device translation service exposed by com.viwoods.stt.
+// On-device translation service exposed by net.wenyuanxu.translate.
 // Stable interface; new methods MUST be appended at the end to keep
 // older callers binary-compatible.
-package com.viwoods.stt.translate;
+package net.wenyuanxu.translate;
 
-import com.viwoods.stt.translate.ITranslateCallback;
+import net.wenyuanxu.translate.ITranslateCallback;
 
 interface ITranslator {
     // Synchronous translate. Caller MUST be on a worker thread —

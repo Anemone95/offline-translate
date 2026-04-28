@@ -29,10 +29,10 @@
         </activity>
 
         <service
-            android:name="com.viwoods.stt.translate.TranslateService"
+            android:name="net.wenyuanxu.translate.TranslateService"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.viwoods.stt.translate.action.BIND" />
+                <action android:name="net.wenyuanxu.translate.action.BIND" />
             </intent-filter>
         </service>
     </application>

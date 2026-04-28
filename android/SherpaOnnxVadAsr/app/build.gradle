@@ -8,7 +8,7 @@ android {
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.viwoods.stt"
+        applicationId "net.wenyuanxu.translate"
         minSdk 24
         targetSdk 33
         versionCode 1

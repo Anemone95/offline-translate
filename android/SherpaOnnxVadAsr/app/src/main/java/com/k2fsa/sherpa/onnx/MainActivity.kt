@@ -29,7 +29,7 @@ import com.k2fsa.sherpa.onnx.OnlineRecognizer
 import com.k2fsa.sherpa.onnx.OnlineRecognizerConfig
 import com.k2fsa.sherpa.onnx.R
 import com.k2fsa.sherpa.onnx.Vad
-import com.viwoods.stt.translate.TranslatorHolder
+import net.wenyuanxu.translate.TranslatorHolder
 import com.k2fsa.sherpa.onnx.getEndpointConfig
 import com.k2fsa.sherpa.onnx.getFeatureConfig
 import com.k2fsa.sherpa.onnx.getModelConfig
